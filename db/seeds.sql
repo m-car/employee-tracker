@@ -1,17 +1,13 @@
--- USE great_bay_bonus_db;
+USE employee_db;
 
--- INSERT INTO users(id, username, password, role_id)
--- VALUES
---   (1, "boba1", "password", 1),
---   (2, "forcejedi", "password", 1),
---   (3, "amyadmin", "password", 2);
+-- create roles
+INSERT INTO roles (id, title, salary)
+VALUES (1, "Sales Lead", 100000),
+        (2, "Salesperson", 80000),
+        (3, "Lead Engineer", 150000),
+        (4, "Software Engineer", 120000),
+        (5, "Accountant", 125000),
+        (6, "Legal Team Lead", 250000),
+        (7, "Lawyer", 190000);
 
--- INSERT INTO auctions(
---   item_name,
---   category,
---   starting_bid,
---   seller_id
--- ) VALUES
---  ("Star Trek Communicator Badge", "Collectibles", 8, 1),
---  ("1951 Chevrolet Pickup", "Automobiles", 90000, 2);
- 
+-- SELECT * FROM roles;

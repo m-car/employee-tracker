@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -16,10 +17,11 @@
   "bugs": {
     "url": "https://github.com/m-car/employee-tracker/issues"
   },
-  "homepage": "https://github.com/m-car/employee-tracker#readme",
   "dependencies": {
     "console.table": "^0.10.0",
-    "inquirer": "^8.1.2",
+    "inquirer": "^7.1.0",
     "mysql": "^2.18.1"
-  }
+  },
+  
+  "homepage": "https://github.com/m-car/employee-tracker#readme"
 }
