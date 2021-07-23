@@ -5,27 +5,54 @@ const menu = () =>{
     //display choices post,  bid, and exit 
     return inquirer.prompt([
         {
-            name: "menu",
-            message: "Test question 1c ",
-            type: "list",
+            name: 'action',
+            type: 'list',
+            message: 'What would you like to do?',
             choices: [
-                "post",
-                "bid",
-                "exit"
+              'View all employees',
+              'View all employees by Department',
+              'View all employees by Manager',
+              'Add Employee',
+              'Remove Employee',
+              'Update Employee Role',
+              'Update Employee Manager',
+              'Exit',
             ]
         }
     ]).then((answers) =>{
         console.log(answers);
         switch(answers.menu){
-            case "post":
-            post();
-            break;
-            case "bid":
-                bid();
+            case 'View all employees':
+                viewAll();
                 break;
-            default:
+      
+              case 'View all employees by Department':
+                viewByDepartment();
+                break;
+      
+              case 'View all employees by Manager':
+                viewByManager();
+                break;
+      
+              case 'Add Employee':
+                addEmployee();
+                break;
+
+            case 'Remove Employee':
+                removeEmploye();
+                break;
+
+            case 'Update Employee Role':
+                updateEmpRole();
+                break;
+
+            case 'Update Employee Manager':
+                updateEmpManger();
+                break;
+      
+              default:
                 connection.end();
-        }
+            }
         
     })
 
