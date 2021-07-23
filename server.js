@@ -93,13 +93,39 @@ viewAll = () => {
 };
 
 viewByDepartment = () => {
-      const query = 'SELECT * FROM roles';
-      console.log(query)
-      connection.query(query, (err, res) => {
+      return inquirer.prompt([
+        {
+          name: "department",
+          type: "list",
+          message:"Which department?",
+          choices: 
+          [
+            "Sales",
+            "Engineering",
+            "Finance",
+            "Legal"
+          ]
+        }
+    ]).then((answer) =>{
+      let choice = 0;
+      if(answer.department === "Sales"){
+        choice = 1;
+      }else if(answer.department === "Engineering"){
+        choice = 2;
+      }else if(answer.department === "Finance"){
+        choice = 3;
+      }else{
+        choice = 4;
+      };
+      const query = 'SELECT employee.first_name, employee.last_name FROM employee WHERE employee.role_id = ?';
+      
+      connection.query(query, choice, (err, res) => {
         if (err) throw err;
+
         console.table(res);
         menu()
-      });
+        })
+    });
 };
 
 viewByManager = () => {
@@ -129,65 +155,90 @@ addEmployee = () =>{
       {
         name: 'role',
         type: 'list',
-        message: `'What is employees role?
-1.Sales Lead,
-2.Salesperson,
-3.Lead Engineer,
-4.Software Engineer,
-5.Accountant,
-6.Legal Team Lead,
-7.Lawyer`,
+        message: 'What is employees role?',
         choices: [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
+          'Sales Lead',
+          'Salesperson',
+          'Lead Engineer',
+          'Software Engineer',
+          'Accountant',
+          'Legal Team Lead',
+          'Lawyer',
         ]
       },
       {
         name: 'manager',
         type: 'list',
-        message: `'Who is employees Manager?',
-        'John Doe',
-        'Mike Chan',
-        'Ashely Rodriguez',
-        'Kevin Tupik',
-        'Malia Brown',
-        'Sarah Lourd',
-        'Tom Allen',
-        '0'`,
+        message: 'Who is employees Manager?',
         choices: [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '0'
+          'John Doe',
+          'Mike Chan',
+          'Ashely Rodriguez',
+          'Kevin Tupik',
+          'Malia Brown',
+          'Sarah Lourd',
+          'Tom Allen',
         ]
       }])
       .then((answers) =>{
-        console.log(answers);
+        let role = 0;
+      if(answers.role === "Sales Lead"){
+        role = 1;
+      }else if(answers.role === "Salesperson"){
+        role = 2;
+      }else if(answers.role === "Lead Engineer"){
+        role = 3;
+      }else if(answers.role === "Software Engineer"){
+        role = 4;
+      }else if(answers.role === "Accountant"){
+        role = 5;
+      }else if(answers.role === "Legal Team Lead"){
+        role = 6;
+      }else if(answers.role === "Lawyer"){
+        role = 7;
+      }else{
+        role = 8;
+      };
+
+      let manager = 0;
+      if(answers.manager === "John Doe"){
+        manager = 1;
+      }else if(answers.manager === "Mike Chan"){
+        manager = 2;
+      }else if(answers.manager === "Lead Engineer"){
+        manager = 3;
+      }else if(answers.manager === "Ashely Rodriguez"){
+        manager = 4;
+      }else if(answers.manager === "Kevin Tupik"){
+        manager = 5;
+      }else if(answers.manager === "Malia Brown"){
+        manager = 6;
+      }else if(answers.manager === "Sarah Lourd"){
+        manager = 7;
+      }else{
+        manager = 8;
+      };
+        // console.log(answers);
+        
         const query = `INSERT INTO employee SET ?`
         connection.query(query, 
           {
           first_name: answers.first_name,
           last_name: answers.last_name,
-          role_id: answers.role || 0,
-          manager_id: answers.manager || 0,
+          role_id: role || 0,
+          manager_id: manager || 0,
         },
         (err) => {
           if(err) throw err;
-          console.log("The employee was successfully created.");
+          console.log("===The employee was successfully created.===");
           menu();
         }
         )
       })
     };
+
+
+
 const removeEmployee = () => {
   return inquirer
       .prompt([
