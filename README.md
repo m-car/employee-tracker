@@ -12,7 +12,11 @@ This is a command line interface that allows you to track employees by way of mu
 
 ## Usage
 
-<iframe src="https://drive.google.com/file/d/10427TPfwaORfvIqwb03rSgMzDzjixTg1/preview" width="640" height="480"></iframe>
+
+
+https://user-images.githubusercontent.com/77650538/126762315-78784871-7c2b-4a89-a41d-26eb94cf9f82.mp4
+
+
 
 ## Issues
 1. Seeding the database sometimes has issues. I have to use mySQL to seed the database.  
