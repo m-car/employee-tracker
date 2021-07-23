@@ -60,7 +60,7 @@ const menu = () =>{
         break;
         
       case 'Remove Employee':
-        removeEmploye();
+        removeEmployee();
         break;
       
       case 'Update Employee Role':
@@ -115,7 +115,8 @@ viewByManager = () => {
 
 addEmployee = () =>{
       return inquirer
-      .prompt([{
+      .prompt([
+        {
         name: 'first_name',
         type: 'input',
         message: 'What is employees first name?',
@@ -187,7 +188,41 @@ addEmployee = () =>{
         )
       })
     };
-                  
+const removeEmployee = () => {
+  return inquirer
+      .prompt([
+        {
+          name: 'employee',
+          type: 'list',
+          message: 'Which employee do you want to delete?',
+          choices: [
+            'John',
+            'Mike',
+            'Ashely',
+            'Kevin',
+            'Malia',
+            'Sarah',
+            'Tom',
+            'Christian',
+          ]
+        }])
+        .then((answers) =>{
+          console.log(answers);
+          const query = `DELETE FROM employee WHERE ?`;
+          connection.query(query, 
+          {
+            first_name: answers.employee,
+          },
+          (err) => {
+            if(err) throw err;
+            console.log("The employee was successfully deleted.");
+            menu();
+          }
+          )
+        })
+
+
+}   
                   
                   
 connection = mysql.createConnection({
